@@ -1,0 +1,18 @@
+#head{width: 100%;text-align: center;}
+#head span{display: inline-block;margin: 0 auto;margin-top: 3rem;}
+.row{width: 30%;height:0.2rem;background:#C8C8CD;}
+.Short{width:10%;}
+.text{margin:0.2rem 0.6rem;font-size: 1.4rem;color: #808080;font-weight:500;}
+.boxMoney{background: #c8c8c8;margin-top: 2rem;display: inline-block;border-radius:2px;}
+.boxMoney2{height:5rem;margin: 1rem;text-align: center;}
+.moeyBg{width: 3rem;height:5rem;margin: 0 3px; background: url(img/bg_number.png);display: inline-block;color: white;
+font-size:3.6rem;text-align: center;line-height: 5rem;border-radius:2px;}
+.dian{    text-align: center;display: inline-block;font-size: 3rem; margin: 0 -4px; line-height: 6rem;}
+.centerFoot{text-align: center;}
+.centerFoot span{display: inline-block;margin: 0 auto; margin-top: 1rem;}
+.text2{font-size:1rem;}
+.moneyBT{font-size:3rem;color:#FF9900;}
+.moneyYM{font-size:3rem;color:#009A49;}
+.btn{height: 4rem;margin: 0 auto; border-radius: 5px;text-align: center;font-size: 1.6rem; color: white;line-height: 3rem;font-weight: bold;}
+.btnWC{width: 94%;background: #009A49;}
+			

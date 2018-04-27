@@ -9,8 +9,11 @@ var revCollector = require('gulp-rev-collector');
 
 gulp.task('minifyjs', function(){
     gulp.src('src/js/**/*.js')
-        .pipe(uglify())//压缩js到一行
-        .pipe(gulp.dest('dist/js'));//输出到js目录
+    	.pipe(rev())
+    	.pipe(uglify())
+    	.pipe(gulp.dest('dist/js'))
+        .pipe(rev.manifest())
+        .pipe(gulp.dest( 'rev/js' ) );
 });
 
 gulp.task('html', function(){
@@ -25,25 +28,44 @@ gulp.task('imagemin', function() {
  		.pipe(gulp.dest("dist/img"))
 });
 
-gulp.task('cssmin', function() {
- 	gulp.src('src/css/*.css')
-        .pipe(minifyCss())
-        .pipe(rev()) 
-        .pipe(gulp.dest('dist/css'))
-        .pipe(rev.manifest())
-        .pipe(gulp.dest('rev/css'));
-});
-//
-//gulp.task('rev',function(){
-// 	gulp.src('dist/css/*.css')
-//  .pipe( revCollector() )
-//  .pipe(gulp.dest('dist/css/'));
+//gulp.task('cssmin', function() {
+// 	gulp.src('src/css/*.css')
+//      .pipe(rev()) 
+//      .pipe(gulp.dest('dist/css'))
+//      .pipe(rev.manifest())
+//      .pipe(gulp.dest('rev/css'));
 //});
 
+gulp.task('css', function () {
+    return gulp.src('src/css/*.css')
+        .pipe(rev())
+        .pipe(gulp.dest('dist/css'))
+        .pipe( rev.manifest() )
+        .pipe( gulp.dest( 'rev/css' ) );
+});
+
+
 gulp.task('rev', function () {
-	gulp.src(['rev/css/*.json', 'src/*.html']) 
-//   gulp.src('src/css/*.css')
-    .pipe(revCollector())                                   
-     //- 执行文件内css名的替换
-    .pipe(gulp.dest('dist'));    
+	 return gulp.src(['rev/**/*.json', 'src/*.html']) 
+        .pipe( revCollector({
+            replaceReved: true,
+            dirReplacements: {
+                'css': '/dist/css',
+                'js': '/dist/js',
+                'cdn/': function(manifest_value) {
+                    return '//cdn' + (Math.floor(Math.random() * 9) + 1) + '.' + 'exsample.dot' + '/img/' + manifest_value;
+                }
+            }
+        }) )
+        .pipe( htmlmin({
+                empty:true,
+                spare:true
+            }) )
+        .pipe( gulp.dest('dist') );
+	
+//	gulp.src(['rev/css/*.json', 'src/*.html']) 
+////   gulp.src('src/css/*.css')
+//  .pipe(revCollector())                                   
+//   //- 执行文件内css名的替换
+//  .pipe(gulp.dest('dist'));    
 });

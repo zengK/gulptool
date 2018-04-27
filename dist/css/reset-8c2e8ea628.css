@@ -1,0 +1,18 @@
+/* reset */
+body{background:#fff;}
+body,h1,h2,h3,h4,h5,h6,p,dl,dd,ul,ol,pre,form,input,textarea,th,td,select,input{margin:0;padding:0;}
+em{font-style:normal}
+li{list-style:none}
+a{text-decoration:none;color: #666;}
+img{border:none; vertical-align:top;}
+img,fieldset{border: none 0;}
+table{border-collapse:collapse;}
+textarea{ resize:none;overflow:auto;}
+table{border-collapse:collapse;border-spacing:0;}
+.clear:after{content: '';display: block;clear: both;height: 0;visibility: hidden;}
+.login{width: 7rem;height:7rem;position:fixed;margin: auto;top:50%; left: 50%;margin:-3.5rem 0 0 -3.5rem;
+	       	background: white;border-radius:5px;z-index:99; display: none;}
+.login img{ width: 5rem;margin-left: 1rem;}
+/* end reset */
+
+
