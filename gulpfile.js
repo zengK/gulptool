@@ -28,14 +28,6 @@ gulp.task('imagemin', function() {
  		.pipe(gulp.dest("dist/img"))
 });
 
-//gulp.task('cssmin', function() {
-// 	gulp.src('src/css/*.css')
-//      .pipe(rev()) 
-//      .pipe(gulp.dest('dist/css'))
-//      .pipe(rev.manifest())
-//      .pipe(gulp.dest('rev/css'));
-//});
-
 gulp.task('css', function () {
     return gulp.src('src/css/*.css')
         .pipe(rev())
@@ -61,11 +53,7 @@ gulp.task('rev', function () {
                 empty:true,
                 spare:true
             }) )
-        .pipe( gulp.dest('dist') );
-	
-//	gulp.src(['rev/css/*.json', 'src/*.html']) 
-////   gulp.src('src/css/*.css')
-//  .pipe(revCollector())                                   
-//   //- 执行文件内css名的替换
-//  .pipe(gulp.dest('dist'));    
+        .pipe( gulp.dest('dist') );   
 });
+
+gulp.task('default',["html","css","minifyjs","rev"])
