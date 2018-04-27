@@ -1,0 +1,12 @@
+input[type=button]{
+	-webkit-appearance:none;
+	outline:none
+}
+input{
+	border-left:0px;border-top:0px;border-right:0px;border-bottom:1px;outline:none;
+}
+.payMoney{height: 4.5rem;background: white;padding:0 1rem;border-top:0.1rem solid #C8C8C8;}
+.payL{display:inline-block;width: 20%;height: 4.5rem;line-height: 4.5rem;font-size:1.4rem;float: left;color:#333333;}
+.payR{display:inline-block;width: 69%; height: 4rem;line-height: 4.5rem;font-size:1.6rem;text-align: right;}
+.paytext{color:#898989; font-weight:normal ;}
+.head{background: white;}

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html style="font-size:10px;">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+		<!--<link rel="stylesheet" type="text/css" href="css/mui.css"/>-->
+		
+		<link rel="stylesheet" type="text/css" href="css/weui.min.css"/> 
+
+		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+		<script src="js/lib/laytpl.js" type="text/javascript" charset="utf-8"></script>
+		<title>我的钱包</title>
+		<style type="text/css">
+			.backdrop{position: absolute;height: 100%; top:0;bottom: 0;left: 0;right: 0;background-color:rgba(0,0,0,0.6);}
+			.backdrop .bg{width: 100%;margin-top: 70px;position: absolute;}
+			.closeX{position: absolute; display: inline-block;width: 50px;height: 50px;top: 85px;right: 11%;}
+			.list{
+				    position: absolute;
+				    top: 240px;
+				    left: 15%;
+				    /*background: white;*/
+				   	z-index: 2;
+				    height: 240px;
+				    width: 70%;
+				    overflow: auto;
+				    border-bottom-right-radius:19px; 
+					border-bottom-left-radius:19px;
+				    /*padding: 15px 0;*/
+			}
+			.cardList{width: 100%;background: wheat;padding-bottom: 10px;}
+			.cardList img{width: 70%;height: 80%;}
+			@media only screen and (min-width: 350px) and (max-width: 390px) {
+				.list{top:230px;height: 235px;}
+			}
+			@media only screen and (min-width: 390px) and (max-width: 420px) {
+				.closeX{top: 90px;}
+				.list{top:240px;height: 266px;}
+			}
+			.listUl{padding:0;margin: 0;}
+			.listUl li{height:100px;background:url(img/ic_cash_quan@2x.png);margin-top: 10px;background-size:100% 100%;}
+			.liLeft{width: 40%; height: 100px;position: relative;float: left; color: white;}
+			.liLeft .money{position: absolute; height: 100px;line-height: 100px;left:15px;width: 88%; text-align: center;font-size: 36px;}
+			.liLeft .Symbol{position: absolute;font-size: 20px;height: 30px;left: 10px;top:20px}
+			.liLeft .discount{position: absolute;font-size: 16px;height: 30px;right: 4px;bottom:8px;font-weight:bold;}
+			.liRight{width: 60%; height: 100px;float: right;}
+			.liRight div{height: 30px;width: 88%;text-align: center;line-height: 30px;overflow:hidden;}
+			.liRight1{color: #f27606; font-size:16px; background: white;border-radius:5px;margin-top: 10px;}
+			.liRight2{color: white;font-size: 14px;}
+			.liRight3{color: white;font-size: 12px;}
+			.information .liFrist{
+				font-size: 1.6rem;
+			}
+			.litextColor{color:#eeeeee;}
+			.colorstyle{color:#0177ff;}
+			
+			#header{width: 100%;position: absolute;top: 0;left: 0;}
+			.head{width: 100%;border-bottom:1px solid #C9C9C9; height: 5rem;text-align: center;line-height: 5rem;color: #4F4F4F;}
+			.logo{margin-left: 1rem;margin-top: 1rem;float: left;width:32px;height: 32px;}
+			.logo img{width: 100%;}
+			.btn{width: 5rem;height: 3rem;background: #039702;color: white;display: inline-block;float: right;margin: 1rem 1rem 0 0;line-height: 3rem;}
+			#title{padding-top:5rem;height: 8rem;text-align: center;font-size: 1.4rem;color: #888888; }
+			#center{width: 100%;background-color: white;}
+			/*.chanegYoNum{height:4.5rem;}*/
+			.yoNum{display:inline-block; width: 11%;height: 3rem;line-height: 3rem;text-align: center;
+			margin: 0.7rem 1% 0; border-radius:13px;color: #333333;font-size: 1.6rem;background: #f0f0f0;}
+			.active{background:#009A49;color: white;}
+			.btnZF{width:90%;height:4rem;background:#f8c478;margin:5.3rem auto 0;text-align: center;display: block;
+			line-height: 4rem;font-size: 1.6rem;border-radius:5px;color:white;}
+			
+			.Cover{position: fixed;left: 0;top: 0;}
+			.coupontop{width: 100%;height: 45%;background: #000000;opacity: 0.5;position: absolute;left: 0;top: 0;}
+			.couponlist{width: 100%;height: 55%;background: white;position: fixed;left: 0;bottom: 0;/*overflow-y:scroll; overflow-x: hidden;-webkit-overflow-scrolling: touch;*/}
+			.box{width: 100%;height: 85%;position: absolute;bottom: 0;left: 0;overflow-y: scroll;overflow-x: hidden;-webkit-overflow-scrolling: touch;}
+			.close{display: inline-block;float: right;width: 3rem;height:3rem;background: url(img/ic_closed.png) no-repeat 1rem 1rem; margin-right: 2rem;}
+			
+			.coupon{width: 90%;margin: 0 auto;height:10rem;position: relative;margin-bottom: 1rem;}
+			.coupon img{height: 100%;width: 100%;}
+			.coupon span{display: inline-block;height:10rem; line-height: 10rem;text-align: center;color: white;}
+			.icon-money{width: 10%; font-size: 3rem; position: absolute;left: 0;top: 0;}
+			.coupon-money{width:40%; font-size: 5rem;position: absolute;left: 10%;top: 0;}
+			
+			.icon-money2{width: 20%; font-size: 2.2rem; position: absolute;left: 26%;top: 16%;}
+			.coupon-money2{width: 35%; font-size: 5rem;position: absolute;left: 0;top: 0;}
+			
+			.information{width: 50%;position: absolute;left:50%;top: 0; height:6rem;font-size: 1.4rem;color: white;margin-top: 1rem;}
+			.typeid{display: none;}
+			
+			
+			.Pop-ups{width:26%;height: 40px;background:black;opacity: 0.8;color: white;position: absolute;left: 37%;top:30%;display: none; border-radius:5px;text-align: center;
+					line-height: 40px;transition: 1s;z-index: 99;font-size:1.4rem;}
+			.numList{background:#009A49;color: white;width:18%;right:1.3rem; position: absolute;text-align: center;font-size: 1rem;}
+			.numList li{border-top:1px solid #FFFFFF;line-height: 3rem;}
+		</style>
+	</head>
+	<body style="overflow-x:hidden;background: #F0F0F0;">
+		<div class="mui-backdrop" style="display: none;">
+				<div class="backdrop">
+					<img class="bg" src="img/ic_tanchuang@2x.png"/>
+					<span class="closeX"></span>
+					<div class="mui-scroll-wrapper list">
+						<div class="cardList mui-scroll">
+							<script id="YHList" type="text/html">
+					   			{{# for(var i = 0, len = d.length; i < len; i++){ }}
+					   				{{# if( d[i].type==5){ }}
+					   					<li style="background: url(img/ic_discount_quan@2x.png);background-size:100%;">
+			   						{{#  } else { }}
+				   						<li style="background: url(img/ic_cash_quan@2x.png);background-size:100%;">
+									{{# } }}
+											<div class="liLeft">
+												{{# if(d[i].type==5){ }}
+												<div class="money">{{d[i].value}}</div>
+												<span class="discount">折</span>
+												{{# }else{ }}
+												<span class="Symbol">¥</span>
+												<div class="money">{{d[i].value}}</div>
+												{{# } }}
+											</div>
+											<div class="liRight">
+												{{# if(d[i].limit==0 && d[i].type==5){ }}
+														<div class="liRight1 colorstyle">-不限额-</div>
+												{{# }else{ }}
+													<div class="liRight1">-满{{d[i].limit}}可用-</div>
+												{{# } }}
+												<div class="liRight2">{{ d[i].deadline }}</div>
+												<div class="liRight3">{{d[i].limits}}</div>
+											</div>
+										</li>
+					   			{{# } }}
+					   		</script>
+							<ul id="ListUl" class="listUl"></ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		
+		
+		
+		
+		<div class="alipay" class="hehe"></div>
+		<div class="login">
+			<img src="img/ajax-loader.gif"/>
+			<span  style=" display: inline-block;width: 7rem; font-size: 1.2rem;text-align: center;">
+				加载中...
+			</span>
+		</div>
+		<div class="Pop-ups">请选择油号</div>
+		<section id="header">
+			<div class="head">
+				<span class="logo">
+					<img  src="img/logo.png"/>
+				</span>
+					下载油帮帮APP新用户首单立减5元
+				<span class="btn">
+					下载
+				</span>
+			</div>
+	    </section>
+	    <!--加油站编号-->
+	    <div class="gascode"style="display: none;"></div>
+	      <!--加油员编号-->
+	    <div class="gasnum"style="display: none;"></div> 
+	  
+	    <section id="title">
+	    	<div class="name"style="font-size: 2rem;height: 3rem;width: 80%;margin-top: 2rem;margin-left: 10%;overflow: hidden; color: #009A49;">无</div> 
+			当前加油站
+	    </section>
+	    <section id="center">
+	    	<div class="payMoney">
+	    		<span class="payL">选择油号</span>
+				<span class="payR" style="overflow-x: auto; overflow-y: hidden;width:76%;">
+					<div class="" style="width:600px;height: 4.5rem;text-align: left;">
+						<span class="yoNum">92#</span>
+						<span class="yoNum">95#</span>
+						<span class="yoNum">0#</span>
+						<span class="yoNum">98#</span>
+						<span class="yoNum">-10#</span>
+						<span class="yoNum">-20#</span>
+						<span class="yoNum">-35#</span>
+					</div>
+				</span>
+				<!--<span class="payL">选择油号</span>
+				<span class="yoNum">#92</span><span class="yoNum">#95</span><span class="yoNum">#0</span><span class="yoNum">#98</span><span class="yoNum">#-10</span><span class="yoNum">#-20</span><span class="yoNum">#-35</span>-->
+				<!--<span id="yoMore" class="yoNum yoMore">更多</span>-->
+				<!--<ul class="numList" style="display: none;">
+					<li class="numLi">#98</li>
+					<li class="numLi">#-10</li>
+					<li class="numLi">#-20</li>
+					<li class="numLi">#-35</li>
+				</ul>-->
+				<span class="yoNumZF" style="display: none;"></span>
+				<span class="couponid" style="display: none;"></span>
+			</div>
+	    	<div class="payMoney">
+				<span class="payL">应付金额</span>
+				<input id="payMoney" class="payR paymoney"  type="text" maxlength="6"   placeholder="请输入加油金额"/><span style="height: 4.5rem;line-height: 4.5rem;font-size: 1.8rem;margin-left: 1rem;">元</span>
+	    	</div>
+			
+			<div class="payMoney">
+				<span class="payL">优惠券</span>
+				<span class="payR paytext"style="display:inline-block;">注册手机号，享5元优惠</span>
+				<span class="payR chanegCover" style="display:none;">选择优惠券</span>
+				<img style="height: 1.5rem;margin-left: 1rem;margin-top: 1.5rem;" src="img/message_center_arrow.png" alt="" />
+			</div>
+	    </section>
+	    <section style="width: 100%;margin: 0 auto;">
+	    	<input type="button" class="btnZF"disabled="disabled" value="支    付" />
+	    	<!--<button class="btnZF">
+	    			待支付，0元
+	    	</button>-->
+	    </section>
+	     <div class="Cover" style="width: 100%;height: 100%; display: none;">
+	     	<div class="coupontop"></div>
+	    	<div class="couponlist">
+	    		<span style="height: 4rem;font-size: 1.6rem; line-height: 4rem;padding: 0 2rem;color:#009A49;font-weight:600;">可用优惠券</span><span class="close"></span>
+		   		<script id="demo" type="text/html">
+		   			{{# for(var i = 0, len = d.length; i < len; i++){ }}
+		   			<div class="coupon">
+		   				<img src="img/yohui2.png"/>
+		   				{{# if(d[i].type==5){ }}
+		   					<span class="coupon-money coupon-money2">{{ d[i].value}}</span>
+		   					<span class="icon-money icon-money2">折</span>
+		   				{{# }else{ }}
+		   					<span class="icon-money">￥</span>
+		   					<span class="coupon-money">{{ d[i].value}}</span>
+		   				{{# } }}
+		   				
+		   				<ul class="information">
+			   				{{# if(d[i].type==0){ }}
+			   					<li class="liFrist">通用券</li>
+			   				{{# } }}
+			   				{{# if(d[i].type==1){ }}
+			   					<li class="liFrist">限额券</li>
+			   				{{# } }}
+			   				{{# if(d[i].type==2){ }}
+			   					<li class="liFrist">限时券</li>
+			   				{{# } }}
+			   				{{# if(d[i].type==3){ }}
+			   					<li class="liFrist">限站券</li>
+			   				{{# } }}
+			   				{{# if(d[i].type==4){}}
+			   					<li class="liFrist">限油券</li>
+			   				{{# } }}
+			   				
+			   				{{# if(d[i].type==5){ }}
+			   					<li class="liFrist">折扣券</li>
+			   				{{# } }}
+			   				{{# if(d[i].type==6){}}
+			   					<li class="liFrist">现金券</li>
+			   				{{# } }}
+		    				<li class="typeid litextColor">{{ d[i].id}}</li>
+							<li class="litextColor">有效期至{{ d[i].deadline}}</li>
+							<li class="litextColor">{{ d[i].limits}}</li>
+		    				{{# if(d[i].minpay==0){ }}
+			   					<li class="litextColor">不限额</li>
+		   					{{# }else{ }}
+		    					<li class="litextColor">满{{ d[i].minpay}}可用 </li>
+		    				{{# } }}
+		    			</ul>
+		    		</div>
+		   			{{# } }}
+		   		</script>
+	    		<div class="box" id="List"></div>
+		    </div>
+	    </div>
+	   
+	</body>
+	<!--<script src="js/lib/mui.min.js" type="text/javascript" charset="utf-8"></script>-->
+	
+	<script src="js/lib/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript" charset="utf-8"></script>
+	<script src="https://api.map.baidu.com/api?v=2.0&ak=kx4hbRcYsOgQZKDIT7ItytNZ7lOq0B5j"></script>
+	<script src="js/common/config.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/common/tools.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/common/common.js" type="text/javascript" charset="utf-8"></script>
+	<script src="//cdn.bootcss.com/jquery-weui/1.0.1/js/jquery-weui.min.js"></script>
+	<script src="//cdn.bootcss.com/jquery-weui/1.0.1/js/swiper.min.js"></script>
+	<script src="//cdn.bootcss.com/jquery-weui/1.0.1/js/city-picker.min.js"></script>
+	<script src="js/lib/jsencrypt.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/page/index2.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		$('.closeX').on('touchend',function(){
+			$('.mui-backdrop').css('display','none');
+		})
+	</script>
+</html>
+

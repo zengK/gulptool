@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html style="font-size:10px;">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+		<link rel="stylesheet" type="text/css" href="css/weui.min.css"/>
+		<link rel="stylesheet" type="text/css" href="css/login-af32c1542b.css"/>
+		<title>账号登录</title>
+		<style type="text/css">
+		</style>
+	</head>
+	<body style="padding:3.5rem 2rem 0;background: #F0F0F0;">
+		<section id="header">
+			<div class="head">
+				<span class="logo">
+					<img class="" src="img/logo.png"/>
+				</span>
+				
+					下载油帮帮APP新用户首单立减5元
+				<span class="btndown">
+					下载
+				</span>
+			</div>
+	    </section>
+		<p class="title">注册手机号享5元优惠</p>
+		<article class="Tel1"> 
+			<input class="Tel border" placeholder="请输入手机号" type="tel" maxlength="11"name="" id="" value="" />
+			<input class="btnColor1 border" disabled="true" type="button" onclick="sendCode(this)"  name="" id="" value="验证" />
+		</article>
+		
+		<div class="input"> 
+			<input class="YZcode" maxlength="5"  placeholder="验证码" style="" type="tel" name="" id="" value="" />
+			<!--<span class="no">没收到？</span>-->
+		</div>
+		<div class="invitationImg" style="">
+			<div class="invitationClick">
+				<img style="" src="img/ic_tianjia@2x.png"/>
+				<span style="">邀请码</span>
+			</div>
+		</div>
+		<div class="input Invitation"> 
+			<input class="addcode " maxlength="15"  placeholder="请输入邀请码(非必填)" style="" type="text" name="" id="" value="" />
+		</div>
+		
+		<article class="btn"> 
+			<input type="button" style="width: 100%;" disabled="true" class="btnDL weui_btn btn2" value="提交" />
+			<!--<input href="javascript:;"class="btnDL weui_btn weui_btn_primary btn2">进入油帮帮</a>-->
+		</article>
+		<p class="xieyi"><span>点击进入表示同意</span><a href="http://www.qiukwi.com/service_agreement/web.html">《油帮帮服务协议》</a></p>
+	</body>
+	<script src="js/lib/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/common/config.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/common/tools.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/common/getUrl.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/common/common.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		
+		$('.invitationClick').on('click',function(){
+			$('.invitationImg').css('display','none');
+			$('.Invitation').css('display','block');
+		})
+		
+		var clock = '';
+		var nums = 30;
+		var btn;
+		function sendCode(thisBtn){ 
+			btn = thisBtn;
+			$('.btnColor1').removeClass('btnColor');
+			btn.disabled = true;
+			btn.value = nums+'S';
+			clock = setInterval(doLoop, 1000);
+		}
+		function doLoop(){
+		 	nums--;
+		 	if(nums > 0){
+		  		btn.value = nums+'S';
+		 	}else{
+				clearInterval(clock); 
+				btn.disabled = false;
+				
+				$('.btnColor1').addClass('btnColor');
+				btn.value = '验证';
+				nums = 30; 
+		 	}
+		}
+	</script>
+	<script src="js/page/login.js" type="text/javascript" charset="utf-8"></script>
+</html>

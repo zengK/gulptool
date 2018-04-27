@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+</body>
+</html>
+<script src="js/lib/jquery-1.11.3.min.js"></script>
+<script src="js/lib/base64.min.js"></script>
+<script src="js/lib/jsencrypt.js"></script>
+<script>
+//    var str = '124中文内容';
+    var base = new Base64();
+    var result2 = base.decode('S31lQ4BDegDsWuew9lP/ZFWXzpxzUeR7JWDfB87hW1fw+nuisz3tqwb8hQrT0xusG352NqaDpx/EtqoQeX6F/xLRr+GYKZmYIXL/4roDBmRCjefx9RD2LbY5PlaiM/VIECTvZYGnqUXbrTe0z5OSGYpi6Idznk1NgnktIXDaEjs=');
+    encrypt.setPrivateKey('MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArWx6cnfc+Ugdu7CW5CtCOeecZqBCUooQDvHxixCxMh5Tyjg1HTkAHW99Wu9Owo4mZ4L+Cj/wpQYDToyUNXGq\n' +
+        '+OvvhnHSH50xc9fStMqu4SizbnLKr0j6DWWsONYK9Vst1ilBcrikZHBQ882qgETr\n' +
+        '3M0ipvAJg6+4tXv5Pza/a4W+n+JmYfRZDgcldoHDj4COOeZZNP8RD41BZx0kAWr9\n' +
+        'Mxt37xoujBnQiRlWV0Zzpy7DbnVE6TQhS2QT6w2Cjt0EF9Kw6BcIBxFYddlSaN2L\n' +
+        'h7HVRuVnVVrjC2RUUaQmmKQd9m7H5VHDoYHArcJjWVMYrcrgYlBkIlBwUx/YjhNz\n' +
+        '/wIDAQAB');
+    encrypt.decrypt(result2);
+//    document.write(result2);
+</script>

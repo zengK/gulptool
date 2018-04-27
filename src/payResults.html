@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html style="font-size: 62.5%;">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+		<link rel="stylesheet" type="text/css" href="css/weui.min.css"/>
+		<link rel="stylesheet" type="text/css" href="css/payResults.css"/>
+		<script src="js/lib/laytpl.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+		</style>
+		<title>支付结果</title>
+	</head>
+	<body style="overflow-x: hidden; position: relative;">
+		
+		<!-- 支付结果优惠券展示 -->
+	   	<section>
+		   	<div class="mui-backdrop">
+				<div class="backdrop">
+					<img class="bg" src="img/ic_tanchuang@2x.png"/>
+					<span class="closeX"></span>
+					<div class="mui-scroll-wrapper list">
+						<div class="cardList mui-scroll">
+							<script id="YHList" type="text/html">
+					   			{{# for(var i = 0, len = d.length; i < len; i++){ }}
+					   				{{# if( d[i].type==5){ }}
+				   						<li style="background: url(img/ic_discount_quan@2x.png);background-size:100%;">
+			   						{{#  } else { }}
+			   							<li style="background: url(img/ic_cash_quan@2x.png);background-size:100%;">
+									{{# } }}
+											<div class="liLeft">
+												{{# if(d[i].type==5){ }}
+													<div class="money">{{d[i].value}}</div>
+													<span class="discount">折</span>
+												{{# }else{ }}
+													<span class="Symbol">¥</span>
+													<div class="money">{{d[i].value}}</div>
+												{{# } }}
+												<span class="liLeftTest">{{d[i].limitHour}}</span>
+											</div>
+											<div class="liRight">
+												{{# if(d[i].limit==0 && d[i].type==5){ }}
+														<div class="liRight1 colorstyle">-不限额-</div>
+												{{# }else{ }}
+													<div class="liRight1">-满{{d[i].limit}}可用-</div>
+												{{# } }}												
+												<div class="liRight2">{{ d[i].deadline }}</div>
+												<div class="liRight3">{{d[i].limits}}</div>
+											</div>
+										</li>
+					   			{{# } }}
+					   		</script>
+							<ul id="ListUl" class="listUl"></ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<article class="head">
+				<div class="img">
+					<img src="img/vipcard/duigou.png"/>
+				</div>
+				<div class="headTel">
+					成功付款<span class="payMoey"><e>￥</e>0.01</span>元！
+				</div>
+			</article>
+			<article class="list">
+				<ul class="listul">
+					<li>
+						<span class="lis liL">订单编号</span>
+						<span class="lis liR1">PXlw0003231303</span>
+					</li>
+					<li>
+						<span class="lis liL">为您节省</span>
+						<span class="lis liR2">￥0</span>
+					</li>
+					<li style="border: none;">
+						<span class="lis liL">获取积分</span>
+						<span class="lis liR3" >0</span>
+					</li>
+				</ul>
+			</article>
+			<article>
+				<input type="button" class="btn weui_btn btnFH" name="" id="" value="完成，返回首页" />
+			</article>
+	   </section>
+	   <div class="bomb" style="display: none;">
+	   </div>
+	   <div class="box" style="display: none;">
+	   		<div class="box-top" style="height:65px;border-bottom: 1px solid #C8C8C8;"> 
+	   		<div class="title" style="">获得抽奖机会 <img style="width: 50px;margin-left: 30px;margin-left: 20px;margin-right: -50px;" src="img/gift.png"/></div>
+	   		</div>
+	   		<p class="" style="text-align: center;margin-top: 20px;">参与抽奖，赢取iphone 8 Plus</p>
+   			<span class="boxbtn cancel">取消</span>
+   			<span class="boxbtn confirm">去抽奖</span>
+	   </div>
+	</body>
+	<script src="js/lib/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/common/config.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/common/tools.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/common/common.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/common/getUrl.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/page/payResults.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		var W=document.documentElement.clientWidth+'px'; 
+		var H=document.documentElement.clientHeight+'px';
+		$('.bomb').css('width',W);
+		$('.bomb').css('height',H);
+		$('.closeX').on('touchend',function(){
+			$('.mui-backdrop').css('display','none');
+		})
+//		
+		
+	</script>
+</html>
